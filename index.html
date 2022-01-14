@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.babylonjs.com/viewer/babylon.viewer.js"></script>
+    <title>Solar System</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        
+
+    </style>
+
+    <script src="https://cdn.babylonjs.com/babylon.js"></script>
+    <script src="https://cdn.babylonjs.com/loaders/babylonjs.loaders.min.js"></script>
+    <script src="https://code.jquery.com/pep/0.4.3/pep.js"></script>
+</head>
+
+<body>
+
+<canvas id="renderCanvas" touch-action="none"></canvas> <!-- touch-action="none" for best results from PEP -->
+<div class="circle"></div>
+<script>
+    const canvas = document.getElementById("renderCanvas"); // Get the canvas element
+    const engine = new BABYLON.Engine(canvas, true); // Generate the BABYLON 3D engine
+
+    // Add your code here matching the playground format
+    const createScene = function () {
+
+        const scene = new BABYLON.Scene(engine);  
+        const camera = new BABYLON.ArcRotateCamera("camera", -Math.PI / 2, Math.PI / 2.5, 15, new BABYLON.Vector3(0, 0, 0));
+        camera.attachControl(canvas, true);
+        const light = new BABYLON.HemisphericLight("light", new BABYLON.Vector3(1, 1, 0));
+
+        const torus = BABYLON.MeshBuilder.CreateTorus("torus", {thickness:0.02, diameter:7});
+        const torus1 = BABYLON.MeshBuilder.CreateTorus("torus", {thickness:0.02, diameter:8});
+        const torus2 = BABYLON.MeshBuilder.CreateTorus("torus", {thickness:0.02, diameter:10.3});
+        const torus3 = BABYLON.MeshBuilder.CreateTorus("torus", {thickness:0.02, diameter:11.3});
+        const torus4 = BABYLON.MeshBuilder.CreateTorus("torus", {thickness:0.02, diameter:14.5});
+        const torus5 = BABYLON.MeshBuilder.CreateTorus("torus", {thickness:0.02, diameter:17.2});
+        const torus6 = BABYLON.MeshBuilder.CreateTorus("torus", {thickness:0.02, diameter:19.2});
+        const torus7 = BABYLON.MeshBuilder.CreateTorus("torus", {thickness:0.02, diameter:22});
+
+        const sun = BABYLON.MeshBuilder.CreateSphere("sphere", {diameter: 4});
+        const mercury = BABYLON.MeshBuilder.CreateSphere("planet", {diameter: 0.15});
+        const venus = BABYLON.MeshBuilder.CreateSphere("sphere", {diameter: 0.252});
+        const earth = BABYLON.MeshBuilder.CreateSphere("sphere", {diameter: 0.267});
+        const mars = BABYLON.MeshBuilder.CreateSphere("sphere", {diameter: 0.171});
+        const jupiter = BABYLON.MeshBuilder.CreateSphere("sphere", {diameter: 2.2});
+        const saturn = BABYLON.MeshBuilder.CreateSphere("sphere", {diameter: 2});
+        const uranus = BABYLON.MeshBuilder.CreateSphere("sphere", {diameter: 1.073});
+        const neptune = BABYLON.MeshBuilder.CreateSphere("sphere", {diameter: 1.038});
+
+        sun.position.x = 0, sun.position.y = 0;
+        var coreMat = new BABYLON.StandardMaterial("coreMat", scene)
+        coreMat.emissiveColor = new BABYLON.Color3(0.4773, 0.0930, 0.0266); 
+        sun.material = coreMat;
+        mercury.position.x = -3.5, mercury.position.y = 0;
+        var material1 = new BABYLON.StandardMaterial(scene);
+        material1.alpha = 1;
+        material1.diffuseColor = new BABYLON.Color3(0.66, 0.66, 0.66);
+        mercury.material = material1;
+        venus.position.x = 4, venus.position.y = 0;
+        var material = new BABYLON.StandardMaterial(scene);
+        material.alpha = 1;
+        material.diffuseColor = new BABYLON.Color3(1, 1, 0);
+        venus.material = material;
+        earth.position.x = 0, earth.position.y = 0, earth.position.z = -5.1;
+        var material2 = new BABYLON.StandardMaterial(scene);
+        material2.alpha = 1;
+        material2.diffuseColor = new BABYLON.Color3(0.67, 0.74, 0.90);
+        earth.material = material2;
+        mars.position.x = 4, mars.position.z = -4;
+        var material3 = new BABYLON.StandardMaterial(scene);
+        material3.alpha = 1;
+        material3.diffuseColor = new BABYLON.Color3(0.63, 0.23, 0.17);
+        mars.material = material3;
+        jupiter.position.x = -3.7, jupiter.position.z = -5.6;
+        var material4 = new BABYLON.StandardMaterial(scene);
+        material4.alpha = 1;
+        material4.diffuseColor = new BABYLON.Color3(0.5, 0.4, 0.2);
+        jupiter.material = material4;
+        saturn.position.x = -4, saturn.position.z = 7.8;
+        var material5 = new BABYLON.StandardMaterial(scene);
+        material5.alpha = 1;
+        material5.diffuseColor = new BABYLON.Color3(0.90, 0.74, 0.54);
+        saturn.material = material5;
+        uranus.position.x = 1, uranus.position.z = 9.1;
+        var material6 = new BABYLON.StandardMaterial(scene);
+        material6.alpha = 1;
+        material6.diffuseColor = new BABYLON.Color3(0.49, 1, 0.83);
+        uranus.material = material6;
+        neptune.position.x = 3, neptune.position.z = 10.2;
+        var material7 = new BABYLON.StandardMaterial(scene);
+        material7.alpha = 1;
+        material7.diffuseColor = new BABYLON.Color3(0.2, 0.2, 0.8);
+        neptune.material = material7;
+
+        // Writer = BABYLON.MeshWriter(scene, {});
+        // text1 = new Writer("By Akhil Soni", {"anchor": "center", "letter-height": 50, "color": "#1C3870", "position":{"z":20}});
+        return scene;
+    };
+
+    const scene = createScene(); //Call the createScene function
+
+    // Register a render loop to repeatedly render the scene
+    engine.runRenderLoop(function () {
+            scene.render();
+    });
+
+    // Watch for browser/canvas resize events
+    window.addEventListener("resize", function () {
+            engine.resize();
+    });
+</script>
+
+</body>
+
+</html>
